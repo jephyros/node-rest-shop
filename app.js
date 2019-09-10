@@ -1,15 +1,29 @@
 const express  = require('express');
-const app = express();
+var cors = require('cors');
+const app = express();  
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 
 const productRouters = require('./api/routes/products');
 const orderRouters = require('./api/routes/orders')
 
+mongoose.connect('mongodb://localhost:27017/node-shop',
+    { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+
+    }).catch(err => {
+    console.log(err)
+  })
+
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+app.use(cors());
 
 
 // Route which should handle requests 
