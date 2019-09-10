@@ -3,13 +3,19 @@ const route = express.Router();
 
 route.get('/',(req, res, next) => {
     res.status(200).json({
-        message : 'Handling Get requests to /products'
+        message : 'Handling Get requests to /products test '
     });
 });
 
 route.post('/',(req, res, next) => {
+    const product ={
+        name: req.body.name,
+        price: req.body.price
+
+    }
     res.status(201).json({
-        message : 'Handling Post requests to /products'
+        message : 'Handling Post requests to /products',
+        createProduct : product
     });
 });
 
